@@ -1,0 +1,257 @@
+/* =========================================
+   BUILDTRACK — RESPONSIVE DESIGN SYSTEM
+   File: css/responsive.css
+   Breakpoints: Mobile (default), Tablet (768px), Desktop (1024px)
+========================================= */
+
+/* -----------------------------------------
+   1. SMALL MOBILE SCREENS (< 480px)
+----------------------------------------- */
+@media (max-width: 480px) {
+    .topbar {
+        min-height: 58px;
+        padding: 8px 12px;
+        gap: 8px;
+    }
+
+    .brand-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+    }
+
+    .brand-name {
+        font-size: 16px;
+    }
+
+    .search-box {
+        width: 140px;
+        min-height: 34px;
+        padding: 0 8px;
+    }
+
+    .search-box input {
+        font-size: 12px;
+    }
+
+    .topbar-actions {
+        gap: 8px;
+    }
+
+    .main-content {
+        padding: 16px 12px 32px;
+    }
+
+    .page-heading h1,
+    .page-header h1 {
+        font-size: 20px;
+    }
+
+    .page-heading,
+    .page-header {
+        gap: 12px;
+        margin-bottom: 18px;
+    }
+
+    .stat-card {
+        padding: 14px;
+    }
+
+    .stat-card strong,
+    .stat-card h2 {
+        font-size: 20px;
+    }
+
+    .panel {
+        padding: 14px;
+        margin-bottom: 18px;
+    }
+
+    .panel-header {
+        margin-bottom: 14px;
+    }
+
+    .panel-header h2 {
+        font-size: 15px;
+    }
+
+    .form-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .form-actions .button,
+    .form-actions .btn {
+        width: 100%;
+    }
+
+    .filter-bar {
+        padding: 12px;
+        gap: 10px;
+    }
+
+    .filter-bar .form-control {
+        min-height: 38px;
+        font-size: 12px;
+    }
+
+    .project-actions {
+        width: 100%;
+    }
+
+    .project-actions .button,
+    .project-actions .btn {
+        flex: 1 1 auto;
+    }
+
+    .budget-chart {
+        width: 130px;
+        height: 130px;
+    }
+
+    .chart-placeholder {
+        width: 92px;
+        height: 92px;
+    }
+
+    .chart-placeholder span {
+        font-size: 20px;
+    }
+}
+
+/* -----------------------------------------
+   2. MOBILE & SMALL TABLETS (< 768px)
+----------------------------------------- */
+@media (max-width: 767px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .project-list,
+    .report-list {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .main-footer,
+    .footer,
+    .app-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+}
+
+/* -----------------------------------------
+   3. TABLETS (768px - 1023px)
+----------------------------------------- */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .topbar {
+        padding: 10px 20px;
+    }
+
+    .search-box {
+        width: 220px;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* -----------------------------------------
+   4. DESKTOPS (1024px+)
+----------------------------------------- */
+@media (min-width: 1024px) {
+    .topbar {
+        padding: 12px 28px;
+    }
+
+    .search-box {
+        width: 260px;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 18px;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: minmax(0, 1.8fr) minmax(280px, 1fr);
+        gap: 20px;
+    }
+}
+
+/* -----------------------------------------
+   5. LARGE DESKTOPS (1440px+)
+----------------------------------------- */
+@media (min-width: 1440px) {
+    .main-content {
+        max-width: 1500px;
+        padding: 36px 40px 64px;
+    }
+
+    .stats-grid {
+        gap: 22px;
+    }
+
+    .dashboard-grid {
+        gap: 24px;
+    }
+}
+
+/* -----------------------------------------
+   6. TOUCH SCREENS & HOVER SAFETY
+----------------------------------------- */
+@media (hover: none) {
+    .button:hover,
+    .btn:hover,
+    .project-card:hover,
+    .expense-card:hover,
+    .worker-card:hover,
+    .invoice-card:hover {
+        transform: none !important;
+    }
+}
+
+/* -----------------------------------------
+   7. PRINT MEDIA
+----------------------------------------- */
+@media print {
+    .topbar,
+    .sidebar,
+    .menu-toggle,
+    .sidebar-backdrop,
+    .form-actions,
+    .filter-bar,
+    .project-actions,
+    #refresh-reports {
+        display: none !important;
+    }
+
+    body {
+        background: #FFFFFF !important;
+        color: #000000 !important;
+    }
+
+    .main-content {
+        padding: 0 !important;
+        max-width: 100% !important;
+    }
+
+    .panel,
+    .stat-card,
+    .project-card {
+        box-shadow: none !important;
+        border: 1px solid #CCCCCC !important;
+        page-break-inside: avoid;
+    }
+}

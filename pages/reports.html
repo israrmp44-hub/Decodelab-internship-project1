@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="View construction project budgets, expenses and invoice reports with BuildTrack.">
+
+    <title>Reports & Analytics | BuildTrack</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS Architecture -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+
+    <!-- JavaScript (Deferred) -->
+    <script src="../js/storage.js" defer></script>
+    <script src="../js/reports.js" defer></script>
+</head>
+
+<body>
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Topbar Header -->
+    <header class="topbar">
+        <div class="topbar-left">
+            <button
+                class="menu-toggle"
+                id="menu-toggle"
+                type="button"
+                aria-label="Toggle navigation menu"
+                aria-expanded="false"
+                aria-controls="sidebar"
+            >
+                <span aria-hidden="true">☰</span>
+            </button>
+
+            <a href="../index.html" class="brand" aria-label="BuildTrack Home">
+                <span class="brand-icon" aria-hidden="true">B</span>
+                <span class="brand-name">Build<span>Track</span></span>
+            </a>
+        </div>
+
+        <div class="topbar-actions">
+            <a href="../index.html" class="button button-secondary">
+                <span>&larr; Dashboard</span>
+            </a>
+
+            <div class="profile" aria-label="User profile">
+                <div class="profile-avatar" aria-hidden="true">IS</div>
+                <div class="profile-info">
+                    <strong>Administrator</strong>
+                    <span>Project Manager</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Application Layout -->
+    <div class="app-layout">
+
+        <!-- Mobile Drawer Backdrop -->
+        <div class="sidebar-backdrop" id="sidebar-backdrop" aria-hidden="true"></div>
+
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar" aria-label="Main Navigation">
+            <div class="sidebar-heading">WORKSPACE</div>
+
+            <nav class="sidebar-nav">
+                <a href="../index.html" class="nav-link">
+                    <span class="nav-icon" aria-hidden="true">▦</span>
+                    <span>Overview</span>
+                </a>
+
+                <a href="projects.html" class="nav-link">
+                    <span class="nav-icon" aria-hidden="true">▤</span>
+                    <span>Projects</span>
+                </a>
+
+                <a href="expenses.html" class="nav-link">
+                    <span class="nav-icon" aria-hidden="true">↗</span>
+                    <span>Expenses</span>
+                </a>
+
+                <a href="workforce.html" class="nav-link">
+                    <span class="nav-icon" aria-hidden="true">♙</span>
+                    <span>Workforce</span>
+                </a>
+
+                <a href="invoices.html" class="nav-link">
+                    <span class="nav-icon" aria-hidden="true">▧</span>
+                    <span>Invoices</span>
+                </a>
+
+                <a href="reports.html" class="nav-link active" aria-current="page">
+                    <span class="nav-icon" aria-hidden="true">▥</span>
+                    <span>Reports</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-bottom">
+                <div class="sidebar-heading">PREFERENCES</div>
+
+                <a href="settings.html" class="nav-link">
+                    <span class="nav-icon" aria-hidden="true">⚙</span>
+                    <span>Settings</span>
+                </a>
+
+                <div class="sidebar-footer">
+                    <span class="status-dot" aria-hidden="true"></span>
+                    <span>System Operational</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main id="main-content" class="main-content">
+
+            <!-- Page Header -->
+            <section class="page-heading">
+                <div>
+                    <p class="eyebrow">BUSINESS INTELLIGENCE</p>
+                    <h1>Reports & Analytics</h1>
+                    <p class="page-description">
+                        Monitor project budgets, compare expenditures, and track receivables performance.
+                    </p>
+                </div>
+
+                <button
+                    type="button"
+                    id="refresh-reports"
+                    class="button button-primary"
+                    aria-label="Refresh financial reports"
+                >
+                    <span aria-hidden="true">↻</span>
+                    <span>Refresh Reports</span>
+                </button>
+            </section>
+
+            <!-- Financial KPI Overview -->
+            <section class="stats-grid" aria-label="Overall Financial Metrics">
+
+                <article class="stat-card">
+                    <div class="stat-top">
+                        <span>Total Projects</span>
+                        <span class="stat-icon" aria-hidden="true">▤</span>
+                    </div>
+                    <strong id="report-total-projects">0</strong>
+                    <p>Total recorded sites</p>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-top">
+                        <span>Total Budget</span>
+                        <span class="stat-icon" aria-hidden="true">◈</span>
+                    </div>
+                    <strong id="report-total-budget">PKR 0</strong>
+                    <p>Combined allocated budget</p>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-top">
+                        <span>Total Expenses</span>
+                        <span class="stat-icon" aria-hidden="true">↗</span>
+                    </div>
+                    <strong id="report-total-expenses">PKR 0</strong>
+                    <p>Total expenditures</p>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-top">
+                        <span>Total Invoices</span>
+                        <span class="stat-icon" aria-hidden="true">▧</span>
+                    </div>
+                    <strong id="report-total-invoices">0</strong>
+                    <p>Generated billings</p>
+                </article>
+
+            </section>
+
+            <!-- Cashflow & Billing Performance -->
+            <section class="stats-grid" style="grid-template-columns: repeat(2, minmax(0, 1fr)); margin-bottom: 24px;" aria-label="Receivables Status">
+
+                <article class="stat-card">
+                    <div class="stat-top">
+                        <span>Paid Receivables</span>
+                        <span class="stat-icon" style="color: var(--color-success);" aria-hidden="true">✓</span>
+                    </div>
+                    <strong id="report-paid-invoices">PKR 0</strong>
+                    <p>Collected revenue</p>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-top">
+                        <span>Pending Receivables</span>
+                        <span class="stat-icon" style="color: var(--color-warning);" aria-hidden="true">⌛</span>
+                    </div>
+                    <strong id="report-pending-invoices">PKR 0</strong>
+                    <p>Awaiting client payment</p>
+                </article>
+
+            </section>
+
+            <!-- Project Budget Analysis -->
+            <section class="panel">
+                <div class="panel-header">
+                    <div>
+                        <h2>Project Budget Analysis</h2>
+                        <p>Detailed expenditure vs. allocated budget per project.</p>
+                    </div>
+                </div>
+
+                <div id="project-report-list" class="report-list" aria-live="polite">
+                    <div class="empty-state">
+                        <span aria-hidden="true">▤</span>
+                        <h3>No project data</h3>
+                        <p>Create projects to see financial utilization reports.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Expense Category Analysis -->
+            <section class="panel">
+                <div class="panel-header">
+                    <div>
+                        <h2>Expense Category Breakdown</h2>
+                        <p>Categorized spending distribution across all active construction operations.</p>
+                    </div>
+                </div>
+
+                <div id="expense-report-list" class="report-list" aria-live="polite">
+                    <div class="empty-state">
+                        <span aria-hidden="true">↗</span>
+                        <h3>No expense data</h3>
+                        <p>Record site expenses to see category analytics.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Page Footer -->
+            <footer class="main-footer">
+                <p>&copy; 2026 BuildTrack. Construction Management System.</p>
+                <span>DecodeLabs Preparation &bull; Version 1.0.0</span>
+            </footer>
+
+        </main>
+
+    </div>
+
+</body>
+</html>

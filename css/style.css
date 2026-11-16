@@ -1,0 +1,540 @@
+/* =========================================
+   BUILDTRACK — MAIN DESIGN SYSTEM & LAYOUT
+   File: css/style.css
+   DecodeLabs Palette: Mocha Mousse & Moonlit Grey
+========================================= */
+
+/* 1. DESIGN TOKENS */
+:root {
+    /* Brand Colors (DecodeLabs Guidelines) */
+    --color-primary: #A78B72;        /* Mocha Mousse */
+    --color-primary-dark: #8C7058;   /* Deep Mocha */
+    --color-primary-light: #F1EAE3;  /* Warm Mocha Tint */
+    --color-accent: #A0D4E0;         /* Ethereal Blue */
+    --color-accent-dark: #6CA6B4;
+
+    /* Backgrounds & Surfaces */
+    --color-background: #F2F0EA;     /* Moonlit Grey */
+    --color-surface: #FFFFFF;        /* Crisp White */
+    --color-surface-soft: #F9F8F5;   /* Soft Surface */
+
+    /* Typography Colors */
+    --color-text: #252525;           /* Primary Dark Text */
+    --color-muted: #777777;          /* Muted Secondary Text */
+    --color-light-text: #999999;     /* Tertiary Placeholder */
+
+    /* Borders & Dividers */
+    --color-border: #E3DFD5;
+    --color-border-light: #ECE9E1;
+
+    /* Semantic Status */
+    --color-success: #2E7D32;
+    --color-success-bg: #E8F5E9;
+    --color-warning: #B26A00;
+    --color-warning-bg: #FFF3E0;
+    --color-danger: #C62828;
+    --color-danger-bg: #FFEBEE;
+    --color-info: #1976D2;
+    --color-info-bg: #E3F2FD;
+
+    /* Elevation & Shadows */
+    --shadow-small: 0 1px 3px rgba(37, 37, 37, 0.05), 0 2px 6px rgba(37, 37, 37, 0.03);
+    --shadow-medium: 0 4px 12px rgba(37, 37, 37, 0.07);
+    --shadow-large: 0 10px 28px rgba(37, 37, 37, 0.1);
+
+    /* Border Radii */
+    --radius-small: 6px;
+    --radius-medium: 10px;
+    --radius-large: 16px;
+    --radius-full: 9999px;
+
+    /* Typography Scale */
+    --font-heading: "Montserrat", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* 2. RESET & BASE */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    min-height: 100vh;
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.5;
+    background-color: var(--color-background);
+    color: var(--color-text);
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+    color: inherit;
+}
+
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* 3. ACCESSIBILITY & FOCUS */
+:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 12px;
+    background: var(--color-primary-dark);
+    color: #FFFFFF;
+    padding: 8px 14px;
+    z-index: 1000;
+    border-radius: var(--radius-small);
+    font-weight: 600;
+    transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+    top: 12px;
+}
+
+::selection {
+    background-color: var(--color-primary);
+    color: #FFFFFF;
+}
+
+/* 4. TOPBAR HEADER */
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    min-height: 64px;
+    width: 100%;
+    padding: 10px 20px;
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Mobile Menu Toggle Button */
+.menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-small);
+    background: var(--color-surface-soft);
+    color: var(--color-text);
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.menu-toggle:hover {
+    background: var(--color-primary-light);
+    border-color: var(--color-primary);
+}
+
+@media (min-width: 1024px) {
+    .menu-toggle {
+        display: none;
+    }
+}
+
+/* Brand Logo */
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.brand-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-small);
+    background: var(--color-primary);
+    color: #FFFFFF;
+    display: grid;
+    place-items: center;
+    font-family: var(--font-heading);
+    font-size: 18px;
+    font-weight: 700;
+    box-shadow: 0 2px 4px rgba(167, 139, 114, 0.3);
+}
+
+.brand-name {
+    font-family: var(--font-heading);
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--color-text);
+}
+
+.brand-name span {
+    color: var(--color-primary);
+}
+
+/* Topbar Actions */
+.topbar-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    min-width: 0;
+}
+
+.search-box {
+    min-height: 38px;
+    width: min(280px, 100%);
+    padding: 0 12px;
+    background: var(--color-surface-soft);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-small);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.search-box:focus-within {
+    border-color: var(--color-primary);
+    background: var(--color-surface);
+}
+
+.search-icon {
+    color: var(--color-muted);
+    font-size: 16px;
+    line-height: 1;
+}
+
+.search-box input {
+    width: 100%;
+    min-width: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: var(--color-text);
+    font-size: 13px;
+}
+
+.search-box input::placeholder {
+    color: var(--color-light-text);
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.profile-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-full);
+    background: var(--color-primary-light);
+    color: var(--color-primary-dark);
+    display: grid;
+    place-items: center;
+    font-size: 12px;
+    font-weight: 700;
+    border: 1px solid var(--color-border);
+}
+
+.profile-info {
+    display: none;
+    flex-direction: column;
+    line-height: 1.3;
+}
+
+.profile-info strong {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.profile-info span {
+    font-size: 10px;
+    color: var(--color-muted);
+}
+
+@media (min-width: 640px) {
+    .profile-info {
+        display: flex;
+    }
+}
+
+/* 5. APPLICATION LAYOUT */
+.app-layout {
+    min-height: calc(100vh - 64px);
+    display: flex;
+    width: 100%;
+    position: relative;
+}
+
+/* 6. SIDEBAR NAVIGATION */
+.sidebar {
+    position: fixed;
+    top: 64px;
+    left: 0;
+    bottom: 0;
+    width: 250px;
+    background: var(--color-surface);
+    border-right: 1px solid var(--color-border);
+    padding: 20px 14px;
+    display: flex;
+    flex-direction: column;
+    z-index: 90;
+    transform: translateX(-100%);
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
+}
+
+.sidebar.open {
+    transform: translateX(0);
+    box-shadow: var(--shadow-large);
+}
+
+/* Backdrop for mobile drawer */
+.sidebar-backdrop {
+    display: none;
+    position: fixed;
+    top: 64px;
+    inset: 0;
+    background: rgba(37, 37, 37, 0.35);
+    z-index: 85;
+}
+
+.sidebar-backdrop.active {
+    display: block;
+}
+
+@media (min-width: 1024px) {
+    .sidebar {
+        position: sticky;
+        top: 64px;
+        height: calc(100vh - 64px);
+        transform: none;
+        box-shadow: none;
+        flex-shrink: 0;
+    }
+
+    .sidebar-backdrop {
+        display: none !important;
+    }
+}
+
+.sidebar-heading {
+    margin: 12px 10px 8px;
+    color: var(--color-muted);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.sidebar-heading:first-child {
+    margin-top: 0;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.nav-link {
+    min-height: 40px;
+    padding: 0 12px;
+    border-radius: var(--radius-small);
+    color: var(--color-muted);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    font-weight: 500;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.nav-icon {
+    width: 18px;
+    text-align: center;
+    font-size: 16px;
+    line-height: 1;
+}
+
+.nav-link:hover {
+    background: var(--color-surface-soft);
+    color: var(--color-text);
+}
+
+.nav-link.active {
+    background: var(--color-primary-light);
+    color: var(--color-primary-dark);
+    font-weight: 600;
+}
+
+.sidebar-bottom {
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 1px solid var(--color-border-light);
+}
+
+.sidebar-footer {
+    margin-top: 14px;
+    padding: 8px 10px 0;
+    color: var(--color-muted);
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: var(--radius-full);
+    background: var(--color-success);
+    flex-shrink: 0;
+}
+
+/* 7. MAIN CONTENT AREA */
+.main-content {
+    flex: 1;
+    min-width: 0;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px 16px 40px;
+}
+
+@media (min-width: 768px) {
+    .main-content {
+        padding: 28px 24px 48px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .main-content {
+        padding: 32px 32px 56px;
+    }
+}
+
+/* Page Header & Eyebrow */
+.page-heading,
+.page-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+@media (min-width: 768px) {
+    .page-heading,
+    .page-header {
+        flex-direction: row;
+        align-items: center;
+    }
+}
+
+.eyebrow {
+    color: var(--color-primary-dark);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.page-heading h1,
+.page-header h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(20px, 3.5vw, 26px);
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--color-text);
+    letter-spacing: -0.5px;
+}
+
+.page-description {
+    color: var(--color-muted);
+    font-size: 13px;
+    margin-top: 4px;
+    max-width: 650px;
+}
+
+/* 8. FOOTER */
+.main-footer,
+.footer,
+.app-footer {
+    margin-top: 40px;
+    padding-top: 18px;
+    border-top: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    color: var(--color-muted);
+    font-size: 12px;
+}
+
+@media (min-width: 768px) {
+    .main-footer,
+    .footer,
+    .app-footer {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+/* 9. MOTION ACCESSIBILITY */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}

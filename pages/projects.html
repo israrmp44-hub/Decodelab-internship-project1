@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Manage construction projects, budgets, and project progress with BuildTrack.">
+
+    <title>Projects | BuildTrack</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS Architecture -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+
+    <!-- JavaScript (Deferred) -->
+    <script src="../js/storage.js" defer></script>
+    <script src="../js/projects.js" defer></script>
+</head>
+
+<body>
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Topbar Header -->
+    <header class="topbar">
+        <div class="topbar-left">
+            <button
+                class="menu-toggle"
+                id="menu-toggle"
+                type="button"
+                aria-label="Toggle navigation menu"
+                aria-expanded="false"
+                aria-controls="sidebar"
+            >
+                <span aria-hidden="true">☰</span>
+            </button>
+
+            <a href="../index.html" class="brand" aria-label="BuildTrack Home">
+                <span class="brand-icon" aria-hidden="true">B</span>
+                <span class="brand-name">Build<span>Track</span></span>
+            </a>
+        </div>
+
+        <div class="topbar-actions">
+            <a href="../index.html" class="button button-secondary">
+                <span>&larr; Dashboard</span>
+            </a>
+
+            <div class="profile" aria-label="User profile">
+                <div class="profile-avatar" aria-hidden="true">IS</div>
+                <div class="profile-info">
+                    <strong>Administrator</strong>
+                    <span>Project Manager</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Application Layout -->
+    <div class="app-layout">
+
+        <!-- Mobile Drawer Backdrop -->
+        <div class="sidebar-backdrop" id="sidebar-backdrop" aria-hidden="true"></div>
+
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar" aria-label="Main Navigation">
+            <div class="sidebar-heading">WORKSPACE</div>
+
+            <nav class="sidebar-nav">
+                <a href="../index.html" class="nav-link">
+                    <span class="nav-icon" aria-hidden="true">▦</span>
+                    <span>Overview</span>
+                </a>
+
+                <a href="projects.html" class="nav-link active" aria-current="page">
+                    <span class="nav-icon" aria-hidden="true">▤</span>
+                    <span>Projects</span>
+                </a>
+
+                <a href="expenses.html" class="nav-link">
+                    <span class="nav-icon" aria-hidden="true">↗</span>
+                    <span>Expenses</span>
+                </a>
+
+                <a href="workforce.html" class="nav-link">
+                    <span class="nav-icon" aria-hidden="true">♙</span>
+                    <span>Workforce</span>
+                </a>
+
+                <a href="invoices.html" class="nav-link">
+                    <span class="nav-icon" aria-hidden="true">▧</span>
+                    <span>Invoices</span>
+                </a>
+
+                <a href="reports.html" class="nav-link">
+                    <span class="nav-icon" aria-hidden="true">▥</span>
+                    <span>Reports</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-bottom">
+                <div class="sidebar-heading">PREFERENCES</div>
+
+                <a href="settings.html" class="nav-link">
+                    <span class="nav-icon" aria-hidden="true">⚙</span>
+                    <span>Settings</span>
+                </a>
+
+                <div class="sidebar-footer">
+                    <span class="status-dot" aria-hidden="true"></span>
+                    <span>System Operational</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main id="main-content" class="main-content">
+
+            <!-- Page Heading -->
+            <section class="page-heading">
+                <div>
+                    <p class="eyebrow">PROJECT MANAGEMENT</p>
+                    <h1>Projects</h1>
+                    <p class="page-description">
+                        Organize, monitor, and manage your construction sites and project budgets.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Project Form Panel -->
+            <section class="panel">
+                <div class="panel-header">
+                    <div>
+                        <h2 id="form-heading">Add New Project</h2>
+                        <p>Fill in the details below to create or update a project record.</p>
+                    </div>
+                </div>
+
+                <form id="project-form" novalidate>
+                    <div class="form-grid">
+
+                        <!-- Project Name -->
+                        <div class="form-group">
+                            <label for="project-name">Project Name *</label>
+                            <input
+                                type="text"
+                                id="project-name"
+                                class="form-control"
+                                placeholder="e.g. Al-Noor Commercial Complex"
+                                maxlength="100"
+                                required
+                            >
+                        </div>
+
+                        <!-- Project Location -->
+                        <div class="form-group">
+                            <label for="project-location">Location</label>
+                            <input
+                                type="text"
+                                id="project-location"
+                                class="form-control"
+                                placeholder="e.g. Sector G-11, Islamabad"
+                                maxlength="150"
+                            >
+                        </div>
+
+                        <!-- Project Budget -->
+                        <div class="form-group">
+                            <label for="project-budget">Project Budget *</label>
+                            <input
+                                type="number"
+                                id="project-budget"
+                                class="form-control"
+                                placeholder="Enter total allocated budget"
+                                min="1"
+                                step="0.01"
+                                required
+                            >
+                        </div>
+
+                        <!-- Project Status -->
+                        <div class="form-group">
+                            <label for="project-status">Project Status</label>
+                            <select id="project-status" class="form-control">
+                                <option value="active">Active</option>
+                                <option value="pending">Pending</option>
+                                <option value="completed">Completed</option>
+                            </select>
+                        </div>
+
+                        <!-- Project Description -->
+                        <div class="form-group form-group-full">
+                            <label for="project-description">Project Description</label>
+                            <textarea
+                                id="project-description"
+                                class="form-control"
+                                rows="3"
+                                maxlength="1000"
+                                placeholder="Brief overview of the construction scope..."
+                            ></textarea>
+                        </div>
+
+                    </div>
+
+                    <!-- Form Status Message -->
+                    <p
+                        id="form-message"
+                        class="form-message"
+                        role="status"
+                        aria-live="polite"
+                        hidden
+                    ></p>
+
+                    <!-- Form Actions -->
+                    <div class="form-actions">
+                        <button type="submit" class="button button-primary" id="save-button">
+                            Save Project
+                        </button>
+
+                        <button
+                            type="button"
+                            id="cancel-edit"
+                            class="button button-secondary"
+                            hidden
+                        >
+                            Cancel Edit
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Projects List Panel -->
+            <section class="panel">
+                <div class="panel-header">
+                    <div>
+                        <h2>All Projects</h2>
+                        <p>Search, filter, and review your registered projects.</p>
+                    </div>
+                </div>
+
+                <!-- Search and Filter Bar -->
+                <div class="filter-bar">
+                    <div class="form-group">
+                        <label for="project-search">Search Projects</label>
+                        <input
+                            type="search"
+                            id="project-search"
+                            class="form-control"
+                            placeholder="Search by name or location..."
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="project-filter-status">Filter by Status</label>
+                        <select id="project-filter-status" class="form-control">
+                            <option value="all">All Statuses</option>
+                            <option value="active">Active</option>
+                            <option value="pending">Pending</option>
+                            <option value="completed">Completed</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Dynamic Projects Container -->
+                <div
+                    id="project-list"
+                    class="project-list"
+                    aria-live="polite"
+                >
+                    <div class="empty-state">
+                        <span aria-hidden="true">▤</span>
+                        <h3>No projects found</h3>
+                        <p>Add your first construction project using the form above.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Page Footer -->
+            <footer class="main-footer">
+                <p>&copy; 2026 BuildTrack. Construction Management System.</p>
+                <span>DecodeLabs Preparation &bull; Version 1.0.0</span>
+            </footer>
+
+        </main>
+
+    </div>
+
+</body>
+</html>
